@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Home = () => {
+const Settings = () => {
   return (
     <div className="min-h-screen p-4 bg-red-500">
       <h1 className="text-2xl font-bold text-red-500">Profile Screen</h1>
@@ -9,4 +9,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Settings
