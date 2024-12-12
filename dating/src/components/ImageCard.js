@@ -37,12 +37,12 @@ export default function TinderStyleCards() {
     const currentUser = userdata[currentIndex];
 
     return (
-        <div className="h-screen w-screen flex items-center justify-center bg-gray-100">
+        <div className="  flex items-center justify-center bg-gray-100 ">
             <div className="relative w-full max-w-md h-[80vh] shadow-xl rounded-xl overflow-hidden">
                 <img 
                     src={currentUser.image} 
                     alt={currentUser.username} 
-                    className="w-full h-full object-cover cursor-pointer"
+                    className=" h-full w-full object-cover cursor-pointer"
                     onClick={toggleZoom}
                 />
                 {isZoomed && (

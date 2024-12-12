@@ -13,7 +13,7 @@ const Navigation = () => {
   return (
     <BrowserRouter>
       <div className="App">
-        <div className="min-h-screen pb-16">
+        <div className="min-h-screen pb-10 bg-gray-100">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
