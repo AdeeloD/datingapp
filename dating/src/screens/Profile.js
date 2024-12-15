@@ -14,15 +14,15 @@ const Profile = () => {
     name: 'Előd',
     age: 22,
     location: 'Dunaújváros',
-    job: 'Szoftverfejlesztő',
+    job: 'Software developer',
     education: 'DUE',
     height: 180,
-    gender: 'Férfi',
-    sexualOrientation: 'Heteroszexuális',
-    relationshipGoal: 'Komoly kapcsolat',
-    languages: ['Magyar', 'Angol','Orosz','Horvát','Thai'],
-    bio: 'Próba bio',
-    interests: ['Utazás', 'Főzés', 'Zene', 'Box'],
+    gender: 'Male',
+    sexualOrientation: 'Heterosexual',
+    relationshipGoal: 'Long-term relationship',
+    languages: ['Hungarian', 'English','Russian','Croatian','Thai'],
+    bio: 'Random test bio',
+    interests: ['Travelig', 'Cooking', 'Music', 'Boxing'],
     photos: [
       'https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://fdczvxmwwjwpwbeeqcth.supabase.co/storage/v1/object/public/images/a8bf1a2c-259e-4e95-b2c2-bb995876ed63/a252bcd6-9a10-40be-bf99-1d850d2026e4.png',
       'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg',
@@ -30,11 +30,13 @@ const Profile = () => {
   });
 
   const handleEditProfile = () => {
+    console.log(`Edit profile toggled. Now editing: ${!isEditing}`);
     setIsEditing(!isEditing);
   };
 
   const handleProfileChange = (e) => {
     const { name, value } = e.target;
+    console.log(`Profile field updated. Name: ${name}, Value: ${value}`);
     setUserProfile(prev => ({
       ...prev,
       [name]: value
@@ -42,13 +44,14 @@ const Profile = () => {
   };
 
   const handleImageClick = (image) => {
+    console.log(`Image clicked: ${image}`);
     setSelectedImage(image);
   };
 
   const renderProfileContent = () => {
     if (isEditing) {
       return (
-        <div className="space-y-4">
+        <div className="space-y-4 overflow-x: auto">
           <div className="grid grid-cols-2 gap-4">
             <input 
               type="text" 
@@ -56,7 +59,7 @@ const Profile = () => {
               value={userProfile.name} 
               onChange={handleProfileChange}
               className="w-full p-2 border rounded"
-              placeholder="Név"
+              placeholder="Name"
             />
             <input 
               type="number" 
@@ -64,7 +67,7 @@ const Profile = () => {
               value={userProfile.age} 
               onChange={handleProfileChange}
               className="w-full p-2 border rounded"
-              placeholder="Életkor"
+              placeholder="Age"
             />
           </div>
           
@@ -73,7 +76,7 @@ const Profile = () => {
             value={userProfile.bio} 
             onChange={handleProfileChange}
             className="w-full p-2 border rounded h-24"
-            placeholder="Mutasd be magad..."
+            placeholder="Introduce yourself..."
           />
 
           <div className="grid grid-cols-2 gap-4">
@@ -83,7 +86,7 @@ const Profile = () => {
               value={userProfile.job} 
               onChange={handleProfileChange}
               className="w-full p-2 border rounded"
-              placeholder="Foglalkozás"
+              placeholder="Job"
             />
             <input 
               type="text" 
@@ -91,7 +94,7 @@ const Profile = () => {
               value={userProfile.education} 
               onChange={handleProfileChange}
               className="w-full p-2 border rounded"
-              placeholder="Végzettség"
+              placeholder="Education"
             />
           </div>
 
@@ -102,9 +105,8 @@ const Profile = () => {
               onChange={handleProfileChange}
               className="w-full p-2 border rounded"
             >
-              <option value="Férfi">Férfi</option>
-              <option value="Nő">Nő</option>
-              <option value="Egyéb">Egyéb</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
             </select>
 
             <select 
@@ -113,14 +115,14 @@ const Profile = () => {
               onChange={handleProfileChange}
               className="w-full p-2 border rounded"
             >
-              <option value="Komoly kapcsolat">Komoly kapcsolat</option>
-              <option value="Barátság">Barátság</option>
-              <option value="Alkalmi kapcsolat">Alkalmi kapcsolat</option>
+              <option value="Long-term relationship">Long-term relationship</option>
+              <option value="Friendship">Friendship</option>
+              <option value="Short-term fun">Short-term fun</option>
             </select>
           </div>
 
           <div>
-            <label className="block mb-2">Érdeklődési körök</label>
+            <label className="block mb-2">Interests</label>
             <div className="flex flex-wrap gap-2">
               {userProfile.interests.map((interest, index) => (
                 <input
@@ -128,6 +130,7 @@ const Profile = () => {
                   type="text"
                   value={interest}
                   onChange={(e) => {
+                    console.log(`Interest updated. Index: ${index}, New Value: ${e.target.value}`);
                     const newInterests = [...userProfile.interests];
                     newInterests[index] = e.target.value;
                     setUserProfile(prev => ({
@@ -139,13 +142,16 @@ const Profile = () => {
                 />
               ))}
               <button 
-                onClick={() => setUserProfile(prev => ({
-                  ...prev,
-                  interests: [...prev.interests, '']
-                }))}
+                onClick={() => {
+                  console.log('New interest added');
+                  setUserProfile(prev => ({
+                    ...prev,
+                    interests: [...prev.interests, '']
+                  }));
+                }}
                 className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
               >
-                + Új érdeklődési kör
+                + New interest
               </button>
             </div>
           </div>
@@ -154,7 +160,7 @@ const Profile = () => {
             onClick={handleEditProfile}
             className="w-full bg-blue-500 text-white p-2 rounded"
           >
-            Mentés
+            Save
           </button>
         </div>
       );
@@ -194,13 +200,13 @@ const Profile = () => {
           </div>
 
           <div className="bg-gray-100 p-4 rounded-lg">
-            <h3 className="font-semibold mb-2">Rólam</h3>
+            <h3 className="font-semibold mb-2">About me</h3>
             <p className="text-gray-700">{userProfile.bio}</p>
           </div>
 
           {/* Érdeklődési körök */}
           <div>
-            <h3 className="font-semibold mb-2">Érdeklődési körök</h3>
+            <h3 className="font-semibold mb-2">Interests</h3>
             <div className="flex flex-wrap gap-2">
               {userProfile.interests.map((interest) => (
                 <span 
@@ -215,13 +221,13 @@ const Profile = () => {
 
           {/* Galéria */}
           <div>
-            <h3 className="font-semibold mb-2">Galéria</h3>
+            <h3 className="font-semibold mb-2">Gallery</h3>
             <div className="flex space-x-3">
               {userProfile.photos.map((photo, index) => (
                 <img 
                   key={index} 
                   src={photo} 
-                  alt={`Galéria ${index + 1}`} 
+                  alt={`Gallery ${index + 1}`} 
                   onClick={() => handleImageClick(photo)}
                   className="w-24 h-24 object-cover rounded-lg cursor-pointer"
                 />
@@ -236,7 +242,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-white p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Profilom</h1>
+        <h1 className="text-2xl font-bold">My profile</h1>
         <button 
           onClick={handleEditProfile}
           className="text-blue-500 hover:bg-blue-100 p-2 rounded-full"
@@ -247,21 +253,27 @@ const Profile = () => {
 
       {renderProfileContent()}
 
-      {/* Képnagyító modál */}
+      
       {selectedImage && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center"
-          onClick={() => setSelectedImage(null)}
+          onClick={() => {
+            console.log('Model closed');
+            setSelectedImage(null)
+          }}
         >
           <div className="relative max-w-full max-h-full">
             <img 
               src={selectedImage} 
-              alt="Nagyított kép" 
+              alt="Zoomed pic" 
               className="max-w-full max-h-screen object-contain"
             />
             <button 
               className="absolute top-4 right-4 bg-white rounded-full p-2"
-              onClick={() => setSelectedImage(null)}
+              onClick={() => {
+                console.log('Model closed via button');
+                setSelectedImage(null)
+              }}
             >
               <X size={24} />
             </button>

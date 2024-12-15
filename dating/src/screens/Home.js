@@ -3,10 +3,8 @@ import ImageCard from '../components/ImageCard'
 
 const Home = () => {
   return (
-    <div className=" overflow-hidden bg-gray-100 py-5">
-  
+    <div className="fixed inset-0 flex items-center justify-center bg-red-500">
       <ImageCard />
-
     </div>
   )
 }
